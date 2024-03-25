@@ -57,3 +57,22 @@ export async function POST(request: Request){
 
     return NextResponse.json({newTodo})
 }
+
+export async function PUT(response: Response){
+const {id, userId, title, completed}: Todo = await response.json()
+
+const res  = await fetch(`${URL}/${id}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+id, userId, title, completed
+    })
+})
+
+if(!res.ok) return NextResponse.json({message: "Failed to update!"})
+
+const updateTodo: Todo = await res.json()
+
+return NextResponse.json(updateTodo)
+
+}
