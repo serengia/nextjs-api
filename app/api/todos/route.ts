@@ -37,7 +37,8 @@ export async function DELETE(response: Response) {
 
 export async function POST(request: Request){
     const {userId, title, completed}:Partial<Todo> = await request.json()
-    if(!userId || !title || !completed) return NextResponse.json({
+
+    if(!userId || !title) return NextResponse.json({
         status: "Failed",
         message: "Please provide all required data."
     })
